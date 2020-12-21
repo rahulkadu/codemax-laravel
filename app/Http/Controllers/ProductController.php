@@ -23,8 +23,8 @@ class ProductController extends Controller
             'name' => 'required',
             'description' => 'required',
             'quantity' => 'required|numeric',
-            'amount' => 'required',
-            'image' => 'required|image',
+            'amount' => 'required|numeric',
+            'image' => 'required',
         ]);
 
         if ($validator->fails()) {
