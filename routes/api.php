@@ -39,12 +39,14 @@ Route::middleware(['auth:api_admin'])->group(function () {
     
 	Route::post('admin/add-product', 'ProductController@add');
 	Route::get('admin/list-product', 'ProductController@listProduct');
+	Route::get('admin/products-count', 'ProductController@productCount');
 });
 
 Route::middleware(['jwt.auth'])->group(function () {
 
 	Route::get('user/list-product', 'ProductController@listProduct');
 	Route::post('user/submit-contact-us', 'ContactUsController@submitContactUs');
+	Route::get('user/products-count', 'ProductController@productCount');
 });
 
 

@@ -38,12 +38,15 @@ class ProductController extends Controller
 
         $filename = md5(Date("YmdHis") . '_' . rand(9, 999));
         $targetFile = 'public/' . $filename . '.' . $extension;
+
+
+        // $file_upload = Storage::disk('public2')->put($targetFile, file_get_contents($file->getRealPath()));
+        // $url = Storage::disk('public2')->url($targetFile);
+        // dd($url);
+
         $file_upload = Storage::disk('local')->put($targetFile, file_get_contents($file->getRealPath()));
-        // die;
-        
         $url = Storage::disk('local')->url($targetFile);
-        // $asd = asset($url);
-        // dd($asd);
+        // dd($url);
 
         $product = new Product();
         $product->name = $request->get('name');
@@ -54,6 +57,13 @@ class ProductController extends Controller
         $product->save();
 
         return response()->json(['success' => 1]);
+    }
+
+    public function productCount(Request $request)
+    {
+        $product = Product::get()->count();
+
+        return response()->json(['count' => $product]);
     }
 
     public function listProduct(Request $request)
